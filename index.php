@@ -5,6 +5,7 @@
 <!--[if IE 9 ]> <html lang="en-us" dir="ltr" class="ie9" xmlns="http://www.w3.org/1999/xhtml"> <![endif]-->   
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en-us" dir="ltr" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>How Many Googles?</title>
         <style type="text/css">
             .body {
@@ -110,7 +111,7 @@
     <body class="body">
         <div class="outer rounded">
             <form action="howmany.php" method="get">
-                <h1>How many <select name="s"><option value="bing">Bings</option><option value="google">Googles</option><option value="yahoo">Yahoos</option></select> would you like?</h1>
+                <h1>How many <select name="s"><option value="b">Bings</option><option value="g" selected="selected">Googles</option><option value="y">Yahoos</option></select> would you like?</h1>
                 <input type="text" name="x" size="2" maxlength="2" /> by <input type="text" name="y" size="2" maxlength="2" /> = <span>:(</span> <input id="submit" type="submit" class="rounded" value="Do it!" />
             </form>
             <span id="link" class="rounded"></span>
