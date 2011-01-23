@@ -21,11 +21,6 @@
                 background-color: #eee;
                 border: 3px solid #ccc;
             }
-            .rounded {
-                border-radius: 10px;
-                -moz-border-radius: 10px;
-                -webkit-border-radius: 10px;
-            }
             h1, form, input, span, select, option {
                 font-size: 36px;
                 line-height: 40px;
@@ -46,7 +41,7 @@
                 text-align: center;
             }
             .ie6 input, .ie6 span {
-                zoom: 1;
+                min-width: 0; /* can't use zoom: 1;, but this also triggers hasLayout */
                 display: inline;
             }
             form {
@@ -73,11 +68,16 @@
             window.onload = function () {
 
                 var numbs   = /[1-9][0-9]?/,
+                    outer   = document.getElementsByTagName('div')[0],
                     form    = document.getElementsByTagName('form')[0],
                     inputs  = form.getElementsByTagName('input'),
                     total   = form.getElementsByTagName('span')[0],
                     select  = form.getElementsByTagName('select')[0],
                     link    = document.getElementById('link');
+
+                // CSS 2.1 doesn't have a "border-radius" property in it,
+                // so technically this isn't valid CSS
+                outer.style.borderRadius = inputs[2].style.borderRadius = link.style.borderRadius = '10px';
 
                 form.onkeyup = function () {
                     if (numbs.test(inputs[0].value) && numbs.test(inputs[1].value)) {
@@ -106,7 +106,7 @@
 
             };
 
-        //]></script>
+        //]]></script>
     </head>
     <body class="body">
         <div class="outer rounded">

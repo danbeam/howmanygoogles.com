@@ -7,7 +7,7 @@ $y = preg_replace('/[^0-9]/', '', $_GET['y']);
 
 // Y U NO GIVE X, Y, or R?
 // NOTE: because of the rewrite rules this should never happen (in theory)
-if(!in_array($s, array('b','g','y')) || '' === $x || '' === $y || $x <= 0 || $y <= 0) {
+if(!in_array($s, array('b','bing','bings','g','google','googles','y','yahoo','yahoos')) || '' === $x || '' === $y || $x <= 0 || $y <= 0) {
     header('Location: /', true, 301);
 }
 
@@ -34,7 +34,6 @@ ob_start();
 </html>
 <?php
 
-// should never get here?
 //file_put_contents('./cache/' . $s . $x . 'x' . $y . '.html', ob_get_contents());
 ob_end_flush();
 
