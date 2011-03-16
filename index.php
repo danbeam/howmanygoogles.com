@@ -64,47 +64,53 @@
         </style>
         <script type="text/javascript">//<![CDATA[
             
-            // this is same as DOM ready
-            window.onload = function () {
+            (function (global) {
 
-                var numbs   = /[1-9][0-9]?/,
-                    outer   = document.getElementsByTagName('div')[0],
-                    form    = document.getElementsByTagName('form')[0],
-                    inputs  = form.getElementsByTagName('input'),
-                    total   = form.getElementsByTagName('span')[0],
-                    select  = form.getElementsByTagName('select')[0],
-                    link    = document.getElementById('link');
+                // this is same as DOM ready
+                global.onload = function () {
 
-                // CSS 2.1 doesn't have a "border-radius" property in it,
-                // so technically this isn't valid CSS
-                outer.style.borderRadius = inputs[2].style.borderRadius = link.style.borderRadius = '10px';
+                    var numbs   = /[1-9][0-9]?/,
+                        outer   = global.document.getElementsByTagName('div')[0],
+                        form    = global.document.getElementsByTagName('form')[0],
+                        inputs  = form.getElementsByTagName('input'),
+                        total   = form.getElementsByTagName('span')[0],
+                        select  = form.getElementsByTagName('select')[0],
+                        link    = global.document.getElementById('link');
 
-                form.onkeyup = function () {
-                    if (numbs.test(inputs[0].value) && numbs.test(inputs[1].value)) {
-                        total.innerHTML = parseInt(inputs[0].value, 10) * parseInt(inputs[1].value, 10);
-                        total.style.display = '';
-                        link.style.display = '';
-                    }
-                    else {
-                        total.style.display = 'none';
-                        link.style.display = 'none';
-                    }
+                    // CSS 2.1 doesn't have a "border-radius" property in it,
+                    // so technically this isn't valid CSS
+                    outer.style.borderRadius = inputs[2].style.borderRadius = link.style.borderRadius = '10px';
+
+                    form.onkeyup = function () {
+                        if (numbs.test(inputs[0].value) && numbs.test(inputs[1].value)) {
+                            total.innerHTML = global.parseInt(inputs[0].value, 10) * global.parseInt(inputs[1].value, 10);
+                            total.style.display = '';
+                            link.style.display = '';
+                        }
+                        else {
+                            total.style.display = 'none';
+                            link.style.display = 'none';
+                        }
+                    };
+
+                    form.onsubmit = function (e, vanity) {
+                        e = e || global.event;
+                        if (e.preventDefault) {
+                            e.preventDefault();
+                        }
+                        e.returnValue = false;
+                        if (numbs.test(inputs[0].value) && numbs.test(inputs[1].value)) {
+                            vanity = select.options[select.selectedIndex].value + '/' + inputs[0].value + 'x' + inputs[1].value;
+                            link.innerHTML = 'Link: ' + '<a href="/' + vanity + '">' + global.location.href + vanity + '</a>';
+                        }
+                        return false;
+                    };
+
+                    form.onkeyup();
+
                 };
 
-                form.onsubmit = function (e, vanity) {
-                    e = e || window.event;
-                    e.preventDefault && e.preventDefault();
-                    e.returnValue = false;
-                    if (numbs.test(inputs[0].value) && numbs.test(inputs[1].value)) {
-                        vanity = select.options[select.selectedIndex].value + '/' + inputs[0].value + 'x' + inputs[1].value;
-                        link.innerHTML = 'Link: ' + '<a href="/' + vanity + '">' + window.location.href + vanity + '</a>';
-                    }
-                    return false;
-                };
-
-                form.onkeyup();
-
-            };
+            }(this));
 
         //]]></script>
     </head>
